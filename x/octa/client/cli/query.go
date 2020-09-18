@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/cosmos/cosmos-sdk/client/context"
 	"github.com/spf13/cobra"
+	loggerConsole "log"
 
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
@@ -49,6 +50,7 @@ func GetCmdListTransfers(queryRoute string, cdc *codec.Codec) *cobra.Command {
 			}
 
 			var out types.QueryResTransfers
+			loggerConsole.Println("GetCmdListTransfers")
 			cdc.MustUnmarshalJSON(res, &out)
 			return cliCtx.PrintOutput(out)
 		},
@@ -69,7 +71,7 @@ func GetCmdGetTransfer(queryRoute string, cdc *codec.Codec) *cobra.Command {
 				return nil
 			}
 
-			var out types.TransferOfFundsWithTime
+			var out types.TransferOfFunds
 			cdc.MustUnmarshalJSON(res, &out)
 			return cliCtx.PrintOutput(out)
 		},

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"github.com/ivansukach/cryptocurrency/x/octa"
 	"io"
+	loggerConsole "log"
 	"os"
 
 	abci "github.com/tendermint/tendermint/abci/types"
@@ -386,7 +387,7 @@ func NewDefaultGenesisState() GenesisState {
 // InitChainer application update at chain initialization
 func (app *NewApp) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.ResponseInitChain {
 	var genesisState simapp.GenesisState
-
+	loggerConsole.Println("InitChainer")
 	app.cdc.MustUnmarshalJSON(req.AppStateBytes, &genesisState)
 
 	return app.mm.InitGenesis(ctx, genesisState)

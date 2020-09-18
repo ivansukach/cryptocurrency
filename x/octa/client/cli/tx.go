@@ -3,6 +3,7 @@ package cli
 import (
 	"bufio"
 	"fmt"
+	"github.com/tendermint/tendermint/crypto"
 	"log"
 
 	"github.com/spf13/cobra"
@@ -48,17 +49,27 @@ func GetCmdMakeTransferOfFunds(cdc *codec.Codec) *cobra.Command {
 			txBldr := auth.NewTxBuilderFromCLI(inBuf).WithTxEncoder(utils.GetTxEncoder(cdc))
 
 			amount, err := sdk.ParseCoins(args[0])
+			addr, err := sdk.AccAddressFromBech32(args[1])
+			if err != nil {
+				log.Println("Error: ", err)
+			}
+			log.Println("ACC ADDRESS FROM BECH32: ", addr)
+			log.Println("SENDER: ", cliCtx.GetFromAddress())
+			log.Println("RECEIVER: ", sdk.AccAddress(args[1]))
+			log.Println("RCVR string: ", args[1])
+			log.Println("RECEIVER addrHash: ", sdk.AccAddress(crypto.AddressHash([]byte(args[1]))))
 			if err != nil {
 				log.Println("Error GetCmdMakeTransfer")
 				return err
 
 			}
-			msg := types.NewMsgMakeTransferOfFunds(cliCtx.GetFromAddress(), []byte(args[1]), amount)
+			msg := types.NewMsgMakeTransferOfFunds(cliCtx.GetFromAddress(), addr, amount)
+			//log.Println("After NewMsgMakeTransfer")
 			err = msg.ValidateBasic()
 			if err != nil {
 				return err
 			}
-
+			//log.Println("ENDv2")
 			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
 		},
 	}

@@ -3,6 +3,7 @@ package octa
 import (
 	"encoding/json"
 	"github.com/cosmos/cosmos-sdk/x/bank"
+	"log"
 
 	"github.com/gorilla/mux"
 	"github.com/spf13/cobra"
@@ -46,6 +47,7 @@ func (AppModuleBasic) DefaultGenesis() json.RawMessage {
 // ValidateGenesis performs genesis state validation for the octa module.
 func (AppModuleBasic) ValidateGenesis(bz json.RawMessage) error {
 	var data GenesisState
+	log.Println("ValidateGenesis")
 	err := ModuleCdc.UnmarshalJSON(bz, &data)
 	if err != nil {
 		return err

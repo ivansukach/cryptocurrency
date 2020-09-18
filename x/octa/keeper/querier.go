@@ -49,13 +49,13 @@ func listTransfers(ctx sdk.Context, k Keeper) ([]byte, error) {
 }
 
 func getTransfer(ctx sdk.Context, path []string, k Keeper) (res []byte, sdkError error) {
-	solutionHash := path[0]
-	scavenge, err := k.GetTransfer(ctx, solutionHash)
+	hash := path[0]
+	transfer, err := k.GetTransfer(ctx, hash)
 	if err != nil {
 		return nil, err
 	}
 
-	res, err = codec.MarshalJSONIndent(k.cdc, scavenge)
+	res, err = codec.MarshalJSONIndent(k.cdc, transfer)
 	if err != nil {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrJSONMarshal, err.Error())
 	}
