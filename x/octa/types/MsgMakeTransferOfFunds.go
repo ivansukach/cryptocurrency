@@ -3,7 +3,6 @@ package types
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"log"
 	"time"
 )
 
@@ -19,8 +18,8 @@ type MsgMakeTransferOfFunds struct {
 
 // NewMsg<Action> creates a new Msg<Action> instance
 func NewMsgMakeTransferOfFunds(sender sdk.AccAddress, receiver sdk.AccAddress, amount sdk.Coins) MsgMakeTransferOfFunds {
-	log.Println("MSG SENDER: ", sender)
-	log.Println("MSG RECEIVER: ", receiver)
+	//log.Println("MSG SENDER: ", sender)
+	//log.Println("MSG RECEIVER: ", receiver)
 	return MsgMakeTransferOfFunds{
 		Sender:   sender,
 		Receiver: receiver,

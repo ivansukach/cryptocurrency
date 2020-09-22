@@ -3,6 +3,7 @@ package octa
 import (
 	"encoding/json"
 	"github.com/cosmos/cosmos-sdk/x/bank"
+	"github.com/ivansukach/cryptocurrency/x/octa/types"
 	"log"
 
 	"github.com/gorilla/mux"
@@ -57,7 +58,7 @@ func (AppModuleBasic) ValidateGenesis(bz json.RawMessage) error {
 
 // RegisterRESTRoutes registers the REST routes for the octa module.
 func (AppModuleBasic) RegisterRESTRoutes(ctx context.CLIContext, rtr *mux.Router) {
-	rest.RegisterRoutes(ctx, rtr)
+	rest.RegisterRoutes(ctx, rtr, types.StoreKey)
 }
 
 // GetTxCmd returns the root tx command for the octa module.

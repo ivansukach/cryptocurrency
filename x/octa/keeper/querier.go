@@ -1,12 +1,12 @@
 package keeper
 
 import (
-	abci "github.com/tendermint/tendermint/abci/types"
-
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/ivansukach/cryptocurrency/x/octa/types"
+	"github.com/sirupsen/logrus"
+	abci "github.com/tendermint/tendermint/abci/types"
 )
 
 // NewQuerier creates a new querier for octa clients.
@@ -36,10 +36,15 @@ func listTransfers(ctx sdk.Context, k Keeper) ([]byte, error) {
 	iterator := k.GetTransfersIterator(ctx)
 
 	for ; iterator.Valid(); iterator.Next() {
+		logrus.Info("TRANSFER HASH WITH KEY: ", string(iterator.Key()))
 		transferHash := RemovePrefixFromHash(iterator.Key(), []byte(types.TransferPrefix))
+		logrus.Info("TRANSFER HASH: ", string(transferHash))
+		var transfer types.TransferOfFunds
+		k.cdc.MustUnmarshalBinaryLengthPrefixed(transferHash, &transfer)
+		logrus.Info("TRANSFER: ", transfer)
 		transferList = append(transferList, string(transferHash))
 	}
-
+	logrus.Info("TRANSFERS: ", transferList)
 	res, err := codec.MarshalJSONIndent(k.cdc, transferList)
 	if err != nil {
 		return res, sdkerrors.Wrap(sdkerrors.ErrJSONMarshal, err.Error())

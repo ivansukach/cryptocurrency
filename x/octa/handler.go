@@ -3,7 +3,6 @@ package octa
 import (
 	"fmt"
 	"github.com/ivansukach/cryptocurrency/x/octa/keeper"
-	"github.com/tendermint/tendermint/crypto"
 	"log"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -27,18 +26,17 @@ func NewHandler(k Keeper) sdk.Handler {
 
 // handleMsgCreateScavenge creates a new scavenge and moves the reward into escrow
 func handleMsgMakeTransferOfFunds(ctx sdk.Context, keeper keeper.Keeper, msg MsgMakeTransferOfFunds) (*sdk.Result, error) {
-	log.Println("HandleMsgMakeTransferOfFunds")
 	var transfer = types.TransferOfFunds{
 		Sender:   msg.Sender,
 		Receiver: msg.Receiver,
 		Amount:   msg.Amount,
 		Time:     msg.Time,
 	}
-	moduleAcct := sdk.AccAddress(crypto.AddressHash([]byte(types.ModuleName)))
-	log.Println("SENDER: ", transfer.Sender)
-	log.Println("RECEIVER: ", transfer.Receiver)
-	log.Println("AMOUNT: ", transfer.Amount)
-	log.Println("ModuleAccount: ", moduleAcct)
+	//moduleAcct := sdk.AccAddress(crypto.AddressHash([]byte(types.ModuleName)))
+	//log.Println("SENDER: ", transfer.Sender)
+	//log.Println("RECEIVER: ", transfer.Receiver)
+	//log.Println("AMOUNT: ", transfer.Amount)
+	//log.Println("ModuleAccount: ", moduleAcct)
 	//sdkError := keeper.CoinKeeper.SendCoins(ctx, transfer.Sender, moduleAcct, transfer.Amount)
 	//if sdkError != nil {
 	//	return nil, sdkError
@@ -51,9 +49,8 @@ func handleMsgMakeTransferOfFunds(ctx sdk.Context, keeper keeper.Keeper, msg Msg
 	if sdkError != nil {
 		log.Println("Error in handler during send coins: ", sdkError)
 		return nil, sdkError
-	} else {
-		log.Println("SUCCESS")
 	}
+	log.Println("TRANSFER COMPLETED SUCCESSFULLY")
 	keeper.SetTransfer(ctx, transfer)
 	ctx.EventManager().EmitEvent(
 		sdk.NewEvent(
