@@ -7,7 +7,6 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/bank"
 	"github.com/ivansukach/cryptocurrency/x/octa/types"
 	"github.com/tendermint/tendermint/libs/log"
-	loggerConsole "log"
 )
 
 // Keeper of the octa store
@@ -33,12 +32,11 @@ func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 }
 
 // Get returns the pubkey from the adddress-pubkey relation
-func (k Keeper) GetTransfer(ctx sdk.Context, key string) (types.TransferOfFunds, error) {
+func (k Keeper) GetTransfer(ctx sdk.Context, keyWithPrefix string) (types.TransferOfFunds, error) {
 	store := ctx.KVStore(k.storeKey)
 	var item types.TransferOfFunds
-	loggerConsole.Println("GET TRANSFER NO PREFIXGetCmdListTransfers")
-	byteKey := []byte(types.TransferPrefix + key)
-	err := k.cdc.UnmarshalBinaryLengthPrefixed(store.Get(byteKey), &item)
+	//byteKey := []byte(types.TransferPrefix + key)
+	err := k.cdc.UnmarshalBinaryLengthPrefixed(store.Get([]byte(keyWithPrefix)), &item)
 	if err != nil {
 		return item, err
 	}
@@ -54,7 +52,7 @@ func (k Keeper) SetTransfer(ctx sdk.Context, value types.TransferOfFunds) {
 	//	Amount:   value.Amount,
 	//	Time:     time.Now().UTC(),
 	//})
-	key := []byte(types.TransferPrefix + string(bz))
+	key := []byte(types.TransferPrefix + value.Id)
 	store.Set(key, bz)
 }
 

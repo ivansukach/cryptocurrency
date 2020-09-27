@@ -27,6 +27,7 @@ func NewHandler(k Keeper) sdk.Handler {
 // handleMsgCreateScavenge creates a new scavenge and moves the reward into escrow
 func handleMsgMakeTransferOfFunds(ctx sdk.Context, keeper keeper.Keeper, msg MsgMakeTransferOfFunds) (*sdk.Result, error) {
 	var transfer = types.TransferOfFunds{
+		Id:       msg.Id,
 		Sender:   msg.Sender,
 		Receiver: msg.Receiver,
 		Amount:   msg.Amount,

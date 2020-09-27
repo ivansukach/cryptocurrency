@@ -3,6 +3,7 @@ package types
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"github.com/google/uuid"
 	"time"
 )
 
@@ -10,6 +11,7 @@ var _ sdk.Msg = &MsgMakeTransferOfFunds{}
 
 // Msg<Action> - struct for unjailing jailed validator
 type MsgMakeTransferOfFunds struct {
+	Id       string         `json:"id" yaml:"id"`
 	Sender   sdk.AccAddress `json:"senderAddress" yaml:"senderAddress"` // address of the validator operator
 	Receiver sdk.AccAddress `json:"receiverAddress" yaml:"receiverAddress"`
 	Amount   sdk.Coins      `json:"amount" yaml:"amount"`
@@ -21,6 +23,7 @@ func NewMsgMakeTransferOfFunds(sender sdk.AccAddress, receiver sdk.AccAddress, a
 	//log.Println("MSG SENDER: ", sender)
 	//log.Println("MSG RECEIVER: ", receiver)
 	return MsgMakeTransferOfFunds{
+		Id:       uuid.New().String(),
 		Sender:   sender,
 		Receiver: receiver,
 		Amount:   amount,

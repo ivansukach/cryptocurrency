@@ -8,7 +8,7 @@ ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=NewApp \
 	-X github.com/cosmos/cosmos-sdk/version.ServerName=cryptocurrencyD \
 	-X github.com/cosmos/cosmos-sdk/version.ClientName=cryptocurrencyCLI \
 	-X github.com/cosmos/cosmos-sdk/version.Version=$(VERSION) \
-	-X github.com/cosmos/cosmos-sdk/version.Commit=$(COMMIT) 
+	-X github.com/cosmos/cosmos-sdk/version.Commit=$(COMMIT)
 
 BUILD_FLAGS := -ldflags '$(ldflags)'
 

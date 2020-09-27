@@ -36,15 +36,20 @@ func listTransfers(ctx sdk.Context, k Keeper) ([]byte, error) {
 	iterator := k.GetTransfersIterator(ctx)
 
 	for ; iterator.Valid(); iterator.Next() {
-		logrus.Info("TRANSFER HASH WITH KEY: ", string(iterator.Key()))
-		transferHash := RemovePrefixFromHash(iterator.Key(), []byte(types.TransferPrefix))
-		logrus.Info("TRANSFER HASH: ", string(transferHash))
+		key := string(iterator.Key())
+		logrus.Info("TRANSFER ID WITH PREFIX: ", key)
+		id := RemovePrefixFromHash(iterator.Key(), []byte(types.TransferPrefix))
+		logrus.Info("TRANSFER ID: ", string(id))
 		var transfer types.TransferOfFunds
-		k.cdc.MustUnmarshalBinaryLengthPrefixed(transferHash, &transfer)
+		transfer, err := k.GetTransfer(ctx, key)
+		if err != nil {
+			return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, err.Error())
+		}
+		//k.cdc.MustUnmarshalBinaryLengthPrefixed(transferHash, &transfer)
 		logrus.Info("TRANSFER: ", transfer)
-		transferList = append(transferList, string(transferHash))
+		transferList = append(transferList, key)
 	}
-	logrus.Info("TRANSFERS: ", transferList)
+	logrus.Info("TRANSFER IDs LIST: ", transferList)
 	res, err := codec.MarshalJSONIndent(k.cdc, transferList)
 	if err != nil {
 		return res, sdkerrors.Wrap(sdkerrors.ErrJSONMarshal, err.Error())

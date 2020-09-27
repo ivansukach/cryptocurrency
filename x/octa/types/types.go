@@ -7,6 +7,7 @@ import (
 )
 
 type TransferOfFunds struct {
+	Id       string         `json:"id" yaml:"id"`
 	Sender   sdk.AccAddress `json:"sender" yaml:"sender"`
 	Receiver sdk.AccAddress `json:"receiver" yaml:"receiver"`
 	Amount   sdk.Coins      `json:"amount" yaml:"amount"`
@@ -14,10 +15,12 @@ type TransferOfFunds struct {
 }
 
 func (t TransferOfFunds) String() string {
-	return strings.TrimSpace(fmt.Sprintf(`Sender: %s
+	return strings.TrimSpace(fmt.Sprintf(`Id: %s
+	Sender: %s
 	Receiver: %s
 	Amount: %s
 	Time: %s`,
+		t.Id,
 		t.Sender,
 		t.Receiver,
 		t.Amount,
