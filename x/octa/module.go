@@ -2,8 +2,8 @@ package octa
 
 import (
 	"encoding/json"
-	"github.com/cosmos/cosmos-sdk/x/bank"
 	"github.com/ivansukach/cryptocurrency/x/octa/types"
+	"github.com/ivansukach/modified-cosmos-sdk/x/bank"
 	"log"
 
 	"github.com/gorilla/mux"
@@ -11,13 +11,13 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/cosmos/cosmos-sdk/client/context"
-	"github.com/cosmos/cosmos-sdk/codec"
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/types/module"
 	"github.com/ivansukach/cryptocurrency/x/octa/client/cli"
 	"github.com/ivansukach/cryptocurrency/x/octa/client/rest"
 	"github.com/ivansukach/cryptocurrency/x/octa/keeper"
+	"github.com/ivansukach/modified-cosmos-sdk/client/context"
+	"github.com/ivansukach/modified-cosmos-sdk/codec"
+	sdk "github.com/ivansukach/modified-cosmos-sdk/types"
+	"github.com/ivansukach/modified-cosmos-sdk/types/module"
 )
 
 // Type check to ensure the interface is properly implemented

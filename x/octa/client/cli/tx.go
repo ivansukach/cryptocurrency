@@ -7,14 +7,14 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/cosmos/cosmos-sdk/client"
-	"github.com/cosmos/cosmos-sdk/client/context"
-	"github.com/cosmos/cosmos-sdk/client/flags"
-	"github.com/cosmos/cosmos-sdk/codec"
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/x/auth"
-	"github.com/cosmos/cosmos-sdk/x/auth/client/utils"
 	"github.com/ivansukach/cryptocurrency/x/octa/types"
+	"github.com/ivansukach/modified-cosmos-sdk/client"
+	"github.com/ivansukach/modified-cosmos-sdk/client/context"
+	"github.com/ivansukach/modified-cosmos-sdk/client/flags"
+	"github.com/ivansukach/modified-cosmos-sdk/codec"
+	sdk "github.com/ivansukach/modified-cosmos-sdk/types"
+	"github.com/ivansukach/modified-cosmos-sdk/x/auth"
+	"github.com/ivansukach/modified-cosmos-sdk/x/auth/client/utils"
 )
 
 // GetTxCmd returns the transaction commands for this module

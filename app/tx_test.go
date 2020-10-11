@@ -3,7 +3,7 @@ package app
 import (
 	"encoding/base64"
 	"fmt"
-	"github.com/cosmos/cosmos-sdk/x/auth"
+	"github.com/ivansukach/modified-cosmos-sdk/x/auth"
 	"github.com/stretchr/testify/require"
 	"testing"
 )

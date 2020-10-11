@@ -3,11 +3,11 @@ module github.com/ivansukach/cryptocurrency
 go 1.13
 
 require (
-	github.com/cosmos/cosmos-sdk v0.39.1
 	github.com/golang/mock v1.3.1 // indirect
 	github.com/golang/protobuf v1.4.2 // indirect
 	github.com/google/uuid v1.0.0
 	github.com/gorilla/mux v1.8.0
+	github.com/ivansukach/modified-cosmos-sdk v0.0.0-20200928094527-745f29569448
 	github.com/onsi/ginkgo v1.8.0 // indirect
 	github.com/onsi/gomega v1.5.0 // indirect
 	github.com/sirupsen/logrus v1.4.2

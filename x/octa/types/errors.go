@@ -1,7 +1,7 @@
 package types
 
 import (
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	sdkerrors "github.com/ivansukach/modified-cosmos-sdk/types/errors"
 )
 
 // TODO: Fill out some custom errors for the module

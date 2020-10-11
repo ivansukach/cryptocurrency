@@ -2,14 +2,14 @@ package rest
 
 import (
 	"fmt"
-	"github.com/cosmos/cosmos-sdk/types/rest"
 	"github.com/gorilla/mux"
 	"github.com/ivansukach/cryptocurrency/x/octa/types"
+	"github.com/ivansukach/modified-cosmos-sdk/types/rest"
 	"github.com/sirupsen/logrus"
 	"log"
 	"net/http"
 
-	"github.com/cosmos/cosmos-sdk/client/context"
+	"github.com/ivansukach/modified-cosmos-sdk/client/context"
 )
 
 func registerQueryRoutes(cliCtx context.CLIContext, r *mux.Router, storeName string) {

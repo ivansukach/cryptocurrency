@@ -5,9 +5,9 @@ import (
 	"github.com/ivansukach/cryptocurrency/x/octa/keeper"
 	"log"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/ivansukach/cryptocurrency/x/octa/types"
+	sdk "github.com/ivansukach/modified-cosmos-sdk/types"
+	sdkerrors "github.com/ivansukach/modified-cosmos-sdk/types/errors"
 )
 
 // NewHandler creates an sdk.Handler for all the octa type messages

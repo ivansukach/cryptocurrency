@@ -1,7 +1,7 @@
 package octa
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdk "github.com/ivansukach/modified-cosmos-sdk/types"
 	abci "github.com/tendermint/tendermint/abci/types"
 )
 

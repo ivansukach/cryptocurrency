@@ -1,8 +1,8 @@
 package octa
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ivansukach/cryptocurrency/x/octa/types"
+	sdk "github.com/ivansukach/modified-cosmos-sdk/types"
 )
 
 // InitGenesis initialize default parameters

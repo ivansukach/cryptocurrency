@@ -15,16 +15,16 @@ import (
 
 	"github.com/ivansukach/cryptocurrency/app"
 
-	"github.com/cosmos/cosmos-sdk/baseapp"
-	"github.com/cosmos/cosmos-sdk/client/debug"
-	"github.com/cosmos/cosmos-sdk/client/flags"
-	"github.com/cosmos/cosmos-sdk/server"
-	"github.com/cosmos/cosmos-sdk/store"
-	storetypes "github.com/cosmos/cosmos-sdk/store/types"
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/x/auth"
-	genutilcli "github.com/cosmos/cosmos-sdk/x/genutil/client/cli"
-	"github.com/cosmos/cosmos-sdk/x/staking"
+	"github.com/ivansukach/modified-cosmos-sdk/baseapp"
+	"github.com/ivansukach/modified-cosmos-sdk/client/debug"
+	"github.com/ivansukach/modified-cosmos-sdk/client/flags"
+	"github.com/ivansukach/modified-cosmos-sdk/server"
+	"github.com/ivansukach/modified-cosmos-sdk/store"
+	storetypes "github.com/ivansukach/modified-cosmos-sdk/store/types"
+	sdk "github.com/ivansukach/modified-cosmos-sdk/types"
+	"github.com/ivansukach/modified-cosmos-sdk/x/auth"
+	genutilcli "github.com/ivansukach/modified-cosmos-sdk/x/genutil/client/cli"
+	"github.com/ivansukach/modified-cosmos-sdk/x/staking"
 )
 
 const flagInvCheckPeriod = "inv-check-period"

@@ -2,13 +2,14 @@
 rm -r ~/.cryptocurrencyCLI
 rm -r ~/.cryptocurrencyD
 
-cryptocurrencyD init nodeLenovoIvanSukach --chain-id octa
+cryptocurrencyD init nodeIvanAmazon --chain-id octa
 
 cryptocurrencyCLI config keyring-backend test
 
 cryptocurrencyCLI keys add admin
 cryptocurrencyCLI keys add genesis
-
+#cryptocurrencyD start
+#cryptocurrencyCLI rest-server --chain-id octa --trust-node
 cryptocurrencyD add-genesis-account $(cryptocurrencyCLI keys show genesis -a) 7999999octa,100000000stake
 cryptocurrencyD add-genesis-account $(cryptocurrencyCLI keys show admin -a) 1octa
 

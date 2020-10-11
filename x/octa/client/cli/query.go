@@ -2,14 +2,14 @@ package cli
 
 import (
 	"fmt"
-	"github.com/cosmos/cosmos-sdk/client/context"
+	"github.com/ivansukach/modified-cosmos-sdk/client/context"
 	"github.com/spf13/cobra"
 	loggerConsole "log"
 
-	"github.com/cosmos/cosmos-sdk/client"
-	"github.com/cosmos/cosmos-sdk/client/flags"
-	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/ivansukach/cryptocurrency/x/octa/types"
+	"github.com/ivansukach/modified-cosmos-sdk/client"
+	"github.com/ivansukach/modified-cosmos-sdk/client/flags"
+	"github.com/ivansukach/modified-cosmos-sdk/codec"
 )
 
 // GetQueryCmd returns the cli query commands for this module

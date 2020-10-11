@@ -3,7 +3,7 @@ package rest
 import (
 	"github.com/gorilla/mux"
 
-	"github.com/cosmos/cosmos-sdk/client/context"
+	"github.com/ivansukach/modified-cosmos-sdk/client/context"
 )
 
 // RegisterRoutes registers octa-related REST handlers to a router

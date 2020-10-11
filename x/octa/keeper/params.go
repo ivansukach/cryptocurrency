@@ -6,7 +6,7 @@ package keeper
 import (
 	"time"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdk "github.com/ivansukach/modified-cosmos-sdk/types"
 	"github.com/ivansukach/cryptocurrency/x/octa/types"
 )
 
