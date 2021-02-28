@@ -17,7 +17,11 @@ func registerQueryRoutes(cliCtx context.CLIContext, r *mux.Router, storeName str
 	r.HandleFunc("/octa/parameters", queryParamsHandlerFn(cliCtx)).Methods("GET")
 	r.HandleFunc("/list", queryListHandlerFn(cliCtx)).Methods("GET")
 	r.HandleFunc("/api/txs", queryListTransactionsHandlerFn(cliCtx)).Methods("GET")
+	r.Methods("OPTIONS").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		log.Println("OPTIONS")
+	})
 	r.Use(customCORSMiddleware())
+
 	//r.Use(mux.CORSMethodMiddleware(r))
 	//mux.MiddlewareFunc()
 	//corsObj := handlers.AllowedOrigins([]string{"*"})
@@ -25,7 +29,15 @@ func registerQueryRoutes(cliCtx context.CLIContext, r *mux.Router, storeName str
 func customCORSMiddleware() mux.MiddlewareFunc {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+			//w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+			w.Header().Set("Access-Control-Allow-Origin", "*")
+			w.Header().Set("Access-Control-Allow-Methods", "*")
+			w.Header().Set("Access-Control-Allow-Headers", "*")
+			if r.Method == "OPTIONS" {
+				w.WriteHeader(http.StatusOK)
+				return
+			}
+
 			// Call the next handler, which can be another middleware in the chain, or the final handler.
 			next.ServeHTTP(w, r)
 		})

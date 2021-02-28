@@ -10,6 +10,7 @@ cryptocurrencyCLI keys add admin
 cryptocurrencyCLI keys add genesis
 #cryptocurrencyD start
 #cryptocurrencyCLI rest-server --chain-id octa --trust-node
+#gdlv run ./cmd/cryptocurrencyCLI rest-server --chain-id octa --trust-node
 cryptocurrencyD add-genesis-account $(cryptocurrencyCLI keys show genesis -a) 7999999octa,100000000stake
 cryptocurrencyD add-genesis-account $(cryptocurrencyCLI keys show admin -a) 1octa
 

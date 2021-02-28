@@ -10,6 +10,7 @@ require (
 	github.com/ivansukach/modified-cosmos-sdk v0.0.0-20200928094527-745f29569448
 	github.com/onsi/ginkgo v1.8.0 // indirect
 	github.com/onsi/gomega v1.5.0 // indirect
+	github.com/sarge/cors v0.0.0-20190703115713-e80254a89df1
 	github.com/sirupsen/logrus v1.4.2
 	github.com/spf13/afero v1.2.2 // indirect
 	github.com/spf13/cobra v1.0.0
