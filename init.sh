@@ -1,23 +1,22 @@
 #!/bin/bash
-rm -r ~/.cryptocurrencyCLI
-rm -r ~/.cryptocurrencyD
+rm -r ~/.octa
 
-cryptocurrencyD init nodeIvanAmazon --chain-id octa
+octadaemon init nodeOCTAGenesis --chain-id octa
 
-cryptocurrencyCLI config keyring-backend test
+#octadaemon config keyring-backend test
 
-cryptocurrencyCLI keys add admin
-cryptocurrencyCLI keys add genesis
+octadaemon keys add admin
+octadaemon keys add genesis
 #cryptocurrencyD start
 #cryptocurrencyCLI rest-server --chain-id octa --trust-node
 #gdlv run ./cmd/cryptocurrencyCLI rest-server --chain-id octa --trust-node
-cryptocurrencyD add-genesis-account $(cryptocurrencyCLI keys show genesis -a) 7999999octa,100000000stake
-cryptocurrencyD add-genesis-account $(cryptocurrencyCLI keys show admin -a) 1octa
+octadaemon add-genesis-account $(octadaemon keys show genesis -a) 7999999000000uocta
+octadaemon add-genesis-account $(octadaemon keys show admin -a) 1000000uocta
 
-cryptocurrencyCLI config chain-id octa
-cryptocurrencyCLI config output json
-cryptocurrencyCLI config indent true
-cryptocurrencyCLI config trust-node true
+#cryptocurrencyCLI config chain-id octa
+#cryptocurrencyCLI config output json
+#cryptocurrencyCLI config indent true
+#cryptocurrencyCLI config trust-node true
 
-cryptocurrencyD gentx --name genesis --keyring-backend test
-cryptocurrencyD collect-gentxs
+octadaemon gentx genesis 500000000uocta --keyring-backend os --chain-id octa
+octadaemon collect-gentxs
