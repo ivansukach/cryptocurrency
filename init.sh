@@ -7,7 +7,7 @@ octadaemon init nodeOCTAGenesis --chain-id octa
 
 octadaemon keys add admin
 octadaemon keys add genesis
-#cryptocurrencyD start
+#octadaemon start
 #cryptocurrencyCLI rest-server --chain-id octa --trust-node
 #gdlv run ./cmd/cryptocurrencyCLI rest-server --chain-id octa --trust-node
 octadaemon add-genesis-account $(octadaemon keys show genesis -a) 7999999000000uocta
