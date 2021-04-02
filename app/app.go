@@ -230,6 +230,21 @@ func NewOctaApp(
 		memKeys:           memKeys,
 	}
 
+	//kb, err := keyring.New(sdk.KeyringServiceName(), "os", DefaultNodeHome, bufio.NewReader(os.Stdin))
+	//if err != nil {
+	//	panic(err)
+	//}
+	//accInfo, err := kb.Key("genesis")
+	//if err != nil {
+	//	panic(err)
+	//}
+	//genAddr := accInfo.GetAddress().String()
+	//logger.Info("GENESIS ADDRESS: " + genAddr)
+	//genesisAccount, err := sdk.AccAddressFromBech32(genAddr)
+	//if err != nil {
+	//	panic(err)
+	//}
+
 	app.ParamsKeeper = initParamsKeeper(appCodec, legacyAmino, keys[paramstypes.StoreKey], tkeys[paramstypes.TStoreKey])
 	// set the BaseApp's parameter store
 	bApp.SetParamStore(app.ParamsKeeper.Subspace(baseapp.Paramspace).WithKeyTable(paramskeeper.ConsensusParamsKeyTable()))
@@ -244,18 +259,25 @@ func NewOctaApp(
 		appCodec, keys[authtypes.StoreKey], app.GetSubspace(authtypes.ModuleName), authtypes.ProtoBaseAccount, maccPerms,
 	)
 	app.BankKeeper = bankkeeper.NewBaseKeeper(
-		appCodec, keys[banktypes.StoreKey], app.AccountKeeper, app.GetSubspace(banktypes.ModuleName), app.BlockedAddrs(),
+		appCodec, keys[banktypes.StoreKey], app.AccountKeeper, app.GetSubspace(banktypes.ModuleName), app.ModuleAccountAddrs(),
+		//genAddr,
 	)
 	stakingKeeper := stakingkeeper.NewKeeper(
 		appCodec, keys[stakingtypes.StoreKey], app.AccountKeeper, app.BankKeeper, app.GetSubspace(stakingtypes.ModuleName),
 	)
+	//ctx := app.BaseApp.NewContext(true, tmproto.Header{})
+	//mintParamSpace := app.GetSubspace(minttypes.ModuleName)
+	//mintParamSpace.Set(ctx, []byte("InflationMin"), sdk.NewDecWithPrec(70, 2))
+	//mintParamSpace.Set(ctx, []byte("InflationMax"), sdk.NewDecWithPrec(90, 2))
 	app.MintKeeper = mintkeeper.NewKeeper(
 		appCodec, keys[minttypes.StoreKey], app.GetSubspace(minttypes.ModuleName), &stakingKeeper,
 		app.AccountKeeper, app.BankKeeper, authtypes.FeeCollectorName,
 	)
+
 	app.DistrKeeper = distrkeeper.NewKeeper(
 		appCodec, keys[distrtypes.StoreKey], app.GetSubspace(distrtypes.ModuleName), app.AccountKeeper, app.BankKeeper,
 		&stakingKeeper, authtypes.FeeCollectorName, app.ModuleAccountAddrs(),
+		//genesisAccount,
 	)
 	app.SlashingKeeper = slashingkeeper.NewKeeper(
 		appCodec, keys[slashingtypes.StoreKey], &stakingKeeper, app.GetSubspace(slashingtypes.ModuleName),
@@ -469,17 +491,6 @@ func (app *OctaApp) ModuleAccountAddrs() map[string]bool {
 	}
 
 	return modAccAddrs
-}
-
-// BlockedAddrs returns all the app's module account addresses that are not
-// allowed to receive external tokens.
-func (app *OctaApp) BlockedAddrs() map[string]bool {
-	blockedAddrs := make(map[string]bool)
-	for acc := range maccPerms {
-		blockedAddrs[authtypes.NewModuleAddress(acc).String()] = !allowedReceivingModAcc[acc]
-	}
-
-	return blockedAddrs
 }
 
 // LegacyAmino returns OctaApp's amino codec.
