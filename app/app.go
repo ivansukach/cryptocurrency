@@ -1,6 +1,8 @@
 package octa
 
 import (
+	"bufio"
+	"github.com/ivansukach/modified-cosmos-sdk/crypto/keyring"
 	"io"
 	stdlog "log"
 	"net/http"
@@ -230,20 +232,20 @@ func NewOctaApp(
 		memKeys:           memKeys,
 	}
 
-	//kb, err := keyring.New(sdk.KeyringServiceName(), "os", DefaultNodeHome, bufio.NewReader(os.Stdin))
-	//if err != nil {
-	//	panic(err)
-	//}
-	//accInfo, err := kb.Key("genesis")
-	//if err != nil {
-	//	panic(err)
-	//}
-	//genAddr := accInfo.GetAddress().String()
-	//logger.Info("GENESIS ADDRESS: " + genAddr)
-	//genesisAccount, err := sdk.AccAddressFromBech32(genAddr)
-	//if err != nil {
-	//	panic(err)
-	//}
+	kb, err := keyring.New(sdk.KeyringServiceName(), "os", DefaultNodeHome, bufio.NewReader(os.Stdin))
+	if err != nil {
+		panic(err)
+	}
+	accInfo, err := kb.Key("genesis")
+	if err != nil {
+		panic(err)
+	}
+	genAddr := accInfo.GetAddress().String()
+	logger.Info("GENESIS ADDRESS: " + genAddr)
+	genesisAccount, err := sdk.AccAddressFromBech32(genAddr)
+	if err != nil {
+		panic(err)
+	}
 
 	app.ParamsKeeper = initParamsKeeper(appCodec, legacyAmino, keys[paramstypes.StoreKey], tkeys[paramstypes.TStoreKey])
 	// set the BaseApp's parameter store
@@ -260,7 +262,7 @@ func NewOctaApp(
 	)
 	app.BankKeeper = bankkeeper.NewBaseKeeper(
 		appCodec, keys[banktypes.StoreKey], app.AccountKeeper, app.GetSubspace(banktypes.ModuleName), app.ModuleAccountAddrs(),
-		//genAddr,
+		genAddr,
 	)
 	stakingKeeper := stakingkeeper.NewKeeper(
 		appCodec, keys[stakingtypes.StoreKey], app.AccountKeeper, app.BankKeeper, app.GetSubspace(stakingtypes.ModuleName),
@@ -277,7 +279,7 @@ func NewOctaApp(
 	app.DistrKeeper = distrkeeper.NewKeeper(
 		appCodec, keys[distrtypes.StoreKey], app.GetSubspace(distrtypes.ModuleName), app.AccountKeeper, app.BankKeeper,
 		&stakingKeeper, authtypes.FeeCollectorName, app.ModuleAccountAddrs(),
-		//genesisAccount,
+		genesisAccount,
 	)
 	app.SlashingKeeper = slashingkeeper.NewKeeper(
 		appCodec, keys[slashingtypes.StoreKey], &stakingKeeper, app.GetSubspace(slashingtypes.ModuleName),
