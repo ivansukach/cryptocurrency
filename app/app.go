@@ -231,8 +231,9 @@ func NewOctaApp(
 		tkeys:             tkeys,
 		memKeys:           memKeys,
 	}
-
-	kb, err := keyring.New(sdk.KeyringServiceName(), "os", DefaultNodeHome, bufio.NewReader(os.Stdin))
+	logger.Info("KEYRING SERVICE NAME: " + sdk.KeyringServiceName())
+	logger.Info("Default Node Home: " + DefaultNodeHome)
+	kb, err := keyring.New("octa", "os", DefaultNodeHome, bufio.NewReader(os.Stdin))
 	if err != nil {
 		panic(err)
 	}
