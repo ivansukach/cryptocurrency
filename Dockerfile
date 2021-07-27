@@ -9,9 +9,7 @@ WORKDIR /go/src/github.com/ivansukach/cryptocurrency
 COPY . .
 
 RUN apk add --no-cache $PACKAGES && make
-ADD init.sh /
-RUN chmod +x /init.sh
-RUN /init.sh
+
 #O=/app/cryptocurrency
 #o - output
 # Final container image
@@ -19,8 +17,8 @@ FROM alpine:latest
 
 
 COPY --from=build-env /go/bin/octadaemon /usr/bin/octadaemon
-COPY --from=build-env /root/.octa /root/.octa
+COPY /.octa /root/.octa
 
-EXPOSE 5432 26656 26657 26658 26660 6060 1317
+EXPOSE 6060 9090 26656 26657 26658 26660
 
 CMD ["octadaemon", "start"]

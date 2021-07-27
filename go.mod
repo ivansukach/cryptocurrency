@@ -6,7 +6,7 @@ require (
 	github.com/golang/snappy v0.0.3-0.20201103224600-674baa8c7fc3 // indirect
 	github.com/google/gofuzz v1.1.1-0.20200604201612-c04b05f3adfa // indirect
 	github.com/gorilla/mux v1.8.0
-	github.com/ivansukach/modified-cosmos-sdk v0.0.0-20210404182619-8ca2c6cefa03
+	github.com/ivansukach/modified-cosmos-sdk v0.0.0-20210416115917-fbaf713ed780
 	github.com/rakyll/statik v0.1.7
 	github.com/spf13/cast v1.3.1
 	github.com/spf13/cobra v1.1.3
